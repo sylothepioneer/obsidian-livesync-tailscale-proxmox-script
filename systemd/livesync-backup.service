@@ -1,0 +1,15 @@
+[Unit]
+Description=Obsidian LiveSync CouchDB volume backup
+Documentation=file:/opt/obsidian-livesync/README.md
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/obsidian-livesync
+Environment=STACK_DIR=/opt/obsidian-livesync
+Environment=DEST=/var/backups/livesync
+Environment=KEEP=7
+ExecStart=/usr/local/bin/livesync-backup.sh
+Nice=10
+IOSchedulingClass=idle
